@@ -37,7 +37,7 @@ python -m pip install -r requirements.txt
 python -m pytest -q
 ```
 
-Baixe o CSV no Kaggle e coloque-o em `data/raw/olist_order_reviews_dataset.csv`. Depois:
+Obtenha o CSV público usando `python -m scripts.download_olist` (espelho da Olist); se preferir, baixe diretamente no Kaggle e coloque em `data/raw/olist_order_reviews_dataset.csv`. Depois:
 
 ```powershell
 python -m src.train
@@ -74,7 +74,9 @@ O script salva `reports/metrics.json` com tamanhos da amostra, distribuição da
 | `article/relatorio-tecnico.md` | Relato metodológico |
 | `.github/workflows/ci.yml` | Testes no GitHub Actions |
 
-## Hugging Face (depois de treinar)
+## Treinamento automático no GitHub Actions
+
+Abra [Train Olist sentiment model](https://github.com/evandronobregaads/nlp-review-sentiment-br/actions/workflows/train-model.yml) para visualizar a execução. O fluxo baixa os comentários públicos, treina o classificador e publica **artefatos da execução** (modelo e relatórios) no Actions. Arquivos gerados não são enviados automaticamente ao código-fonte. Confira a execução e baixe os artefatos para auditoria.\n\n## Hugging Face (depois de treinar)
 
 Após criar o modelo e os resultados, revise a licença dos artefatos e autentique-se com `hf auth login`. Use:
 
