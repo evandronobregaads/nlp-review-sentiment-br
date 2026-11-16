@@ -1,0 +1,35 @@
+{
+  "dataset": "Olist Brazilian E-Commerce Public Dataset",
+  "source": "https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce",
+  "split": "80/20 estratificado, seed 42",
+  "samples_total": 31610,
+  "samples_train": 25288,
+  "samples_test": 6322,
+  "class_distribution": {
+    "positivo": 21345,
+    "negativo": 10265
+  },
+  "baseline_macro_f1": 0.4031,
+  "accuracy": 0.9163,
+  "macro_f1": 0.9076,
+  "confusion_matrix": [
+    [
+      1927,
+      126
+    ],
+    [
+      403,
+      3866
+    ]
+  ],
+  "labels": [
+    "negativo",
+    "positivo"
+  ],
+  "limitations": "Estrelas são rótulos aproximados; não mede delivery ou dados do iFood.",
+  "provenance": {
+    "workflow_run_url": "https://github.com/evandronobregaads/nlp-review-sentiment-br/actions/runs/43939951435",
+    "artifact_name": "sentiment-model-and-metrics",
+    "observed_on": "2026-11-16"
+  }
+}
