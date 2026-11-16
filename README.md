@@ -4,7 +4,7 @@
 
 Classificador educacional de **sentimento em avaliações brasileiras** com **Python, pandas, scikit-learn, TF-IDF, regressão logística, FastAPI e testes automatizados**.
 
-> **Status:** código-base publicado e testes locais aprovados. **Treinamento e métricas sobre dados reais ainda pendentes.** Não é um modelo LLM nem utiliza dados privados ou internos do iFood.
+> **Status:** modelo **treinado e avaliado no GitHub Actions** com dados públicos da Olist em 16/11/2026; resultados reproduzíveis disponíveis em `reports/metrics.json`. O modelo `.joblib` está disponível como artefato da execução, ainda não publicado no Hugging Face. Não é um modelo LLM nem utiliza dados privados ou internos do iFood.
 
 ## Problema e arquitetura
 
@@ -55,12 +55,12 @@ Antes de treinar, a API retorna HTTP 503 para inferência, pois o artefato ainda
 
 ## Avaliação e resultados
 
-O script salva `reports/metrics.json` com tamanhos da amostra, distribuição das classes, **acurácia, F1 macro, F1 macro do baseline de classe majoritária e matriz de confusão**. Nenhum valor de desempenho em dados reais foi calculado ou publicado ainda.
+O script salva `reports/metrics.json` com tamanhos da amostra, distribuição das classes, **acurácia, F1 macro, F1 macro do baseline de classe majoritária e matriz de confusão**. Resultados reais obtidos em [execução bem-sucedida do GitHub Actions](https://github.com/evandronobregaads/nlp-review-sentiment-br/actions/runs/43939951435), com 31.610 avaliações após filtros, 25.288 para treino e 6.322 para teste. Acurácia **91,63%**, F1 macro **0,9076**; baseline de classe majoritária F1 macro **0,4031**. Detalhes auditáveis em [`reports/metrics.json`](reports/metrics.json).
 
 | Experimento | F1 macro | Status |
 | --- | --- | --- |
-| Baseline de classe majoritária | — | A executar |
-| TF-IDF + regressão logística | — | A executar |
+| Baseline de classe majoritária | 0,4031 | GitHub Actions, 16/11/2026 |
+| TF-IDF + regressão logística | 0,9076 | GitHub Actions, 16/11/2026 |
 
 ## Arquivos importantes
 
@@ -76,7 +76,7 @@ O script salva `reports/metrics.json` com tamanhos da amostra, distribuição da
 
 ## Treinamento automático no GitHub Actions
 
-Abra [Train Olist sentiment model](https://github.com/evandronobregaads/nlp-review-sentiment-br/actions/workflows/train-model.yml) para visualizar a execução. O fluxo baixa os comentários públicos, treina o classificador e publica **artefatos da execução** (modelo e relatórios) no Actions. Arquivos gerados não são enviados automaticamente ao código-fonte. Confira a execução e baixe os artefatos para auditoria.\n\n## Hugging Face (depois de treinar)
+Abra [Train Olist sentiment model](https://github.com/evandronobregaads/nlp-review-sentiment-br/actions/workflows/train-model.yml) para visualizar a execução. O fluxo baixa os comentários públicos, treina o classificador e publica **artefatos da execução** (modelo e relatórios) no Actions. O relatório resumido da execução foi publicado em `reports/metrics.json`; o arquivo binário do modelo continua como artefato do Actions. Confira a execução e baixe os artefatos para auditoria.\n\n## Hugging Face (depois de treinar)
 
 Após criar o modelo e os resultados, revise a licença dos artefatos e autentique-se com `hf auth login`. Use:
 
