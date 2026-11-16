@@ -1,0 +1,35 @@
+name: Train Olist sentiment model
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/train-model.yml'
+permissions:
+  contents: read
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Download public Olist reviews (not checked into repository)
+        run: python -m scripts.download_olist
+      - name: Train ML model and print real metrics
+        run: python -m src.train
+      - name: Smoke test inference
+        run: python -m src.predict "Produto excelente e entrega rápida!"
+      - name: Upload training artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: sentiment-model-and-metrics
+          path: |
+            models/review_sentiment.joblib
+            reports/metrics.json
+            reports/classification_report.txt
+          retention-days: 30
+          if-no-files-found: error
